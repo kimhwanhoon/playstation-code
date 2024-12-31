@@ -94,39 +94,56 @@ const PlayStationGiftCard = () => {
           {/* Code Display */}
           <div className="bg-white/10 backdrop-blur-sm text-white rounded-lg p-4 sm:p-5 mb-4 sm:mb-6 w-full max-w-sm mx-auto">
             <p className="text-base sm:text-lg mb-1">Ton code cadeau :</p>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full text-xl font-medium sm:text-2xl font-mono tracking-wider text-gray-700"
-                >
-                  {isCodeVisible ? code : '****-****-****'}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <form onSubmit={handlePasswordSubmit} className="space-y-4">
-                  <h3 className="font-semibold">Entrez le mot de passe</h3>
-                  <Input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? (
-                      <div className="w-4 h-4 animate-spin border-2 border-white/20 border-t-white rounded-full"></div>
-                    ) : (
-                      'Afficher le code'
-                    )}
+            {isCodeVisible ? (
+              <Input
+                type="text"
+                value={code}
+                readOnly
+                onClick={() => {
+                  navigator.clipboard.writeText(code);
+                  alert('Code copié dans le presse-papiers !');
+                }}
+                className="text-center bg-white/90 backdrop-blur-sm w-full text-xl font-medium sm:text-2xl font-mono tracking-wider text-gray-700 cursor-pointer hover:bg-white/100 transition-colors"
+              />
+            ) : (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full text-xl font-medium sm:text-2xl font-mono tracking-wider text-gray-700"
+                  >
+                    {isCodeVisible ? code : '****-****-****'}
                   </Button>
-                  {!isPasswordCorrect && codeWrote && (
-                    <p className="text-red-500 text-sm">
-                      Mot de passe incorrect
-                    </p>
-                  )}
-                </form>
-              </PopoverContent>
-            </Popover>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
+                  <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                    <h3 className="font-semibold">Entrez le mot de passe</h3>
+                    <Input
+                      type="password"
+                      placeholder="Mot de passe"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <div className="w-4 h-4 animate-spin border-2 border-white/20 border-t-white rounded-full"></div>
+                      ) : (
+                        'Afficher le code'
+                      )}
+                    </Button>
+                    {!isPasswordCorrect && codeWrote && (
+                      <p className="text-red-500 text-sm">
+                        Mot de passe incorrect
+                      </p>
+                    )}
+                  </form>
+                </PopoverContent>
+              </Popover>
+            )}
           </div>
 
           {/* Description */}

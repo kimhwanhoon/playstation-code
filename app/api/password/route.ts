@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const findPassword = async (req: NextRequest) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
   const { password } = await req.json();
 
   if (password === process.env.CODE_PASSWORD) {
