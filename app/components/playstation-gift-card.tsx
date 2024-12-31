@@ -74,7 +74,7 @@ const PlayStationGiftCard = () => {
             Pour Jason Cruz
           </h2>
           <p className="text-[#1f3470] text-base sm:text-lg">
-            Mon ami, que cette carte soit le début d'une nouvelle aventure
+            Mon ami, que cette carte soit le début d&apos;une nouvelle aventure
             épique dans le monde PlayStation. Que chaque partie soit remplie de
             joie, de défis et de victoires mémorables !
           </p>
